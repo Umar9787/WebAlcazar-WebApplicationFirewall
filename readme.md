@@ -1,6 +1,6 @@
 # WebAlcazar (Web Application Firewall)
 ## Description
-A web application firewall (WAF) is a specific form of application firewall that filters, monitors, and blocks HTTP traffic to and from a web service. At current time the application provides security against SQL injection attacks. In the future it will defend against more attacks.
+A web application firewall (WAF) is a specific form of application firewall that filters, monitors, and blocks HTTP traffic to and from a web service. At current time, the application provides security against SQL injection attacks. In the future, it will defend against more attacks.
 ## Tools Used
 - Django for backend server.
 - Jupyter Notebook for Training Machine Learning MLP model.
