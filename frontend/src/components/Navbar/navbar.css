@@ -1,27 +1,24 @@
 .nav {
+  margin: 0px;
+  padding: 0px;
   height: 50px;
   width: 100%;
-  background-color: #4d4d4d;
+  background-color: #222d32;
+
   position: relative;
 }
 
-.nav > .nav-header {
-  display: inline;
-}
-
-.nav > .nav-header > .nav-title {
-  display: inline-block;
-}
-
-.nav > .nav-header > .nav-title > .nav-title-logo {
+.nav > .nav-title-logo {
   -webkit-transition: -webkit-transform 0.8s ease-in-out;
   transition: transform 0.8s ease-in-out;
   width: 50px;
   height: 50px;
+  padding-left: 4px;
 }
-.nav > .nav-header > .nav-title > .nav-title-logo:hover {
+.nav > .nav-title-logo:hover {
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
+  padding-left: 4px;
 }
 .nav > .nav-btn {
   display: none;
@@ -30,6 +27,7 @@
 .nav > .nav-links {
   display: inline;
   float: right;
+  margin-right: 40%;
   font-size: 18px;
 }
 
@@ -40,21 +38,96 @@
   color: #efefef;
 }
 
+.nav > .nav-links-height {
+  display: inline;
+  float: right;
+  margin-right: 40%;
+  font-size: 18px;
+}
+
+.nav > .nav-links-height > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #efefef;
+}
+
 .nav > .nav-links > a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.nav > .nav-links-height > a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
 .nav > #nav-check {
   display: none;
 }
+/* Dropdown Button */
+.dropbtn {
+  background-color: #222d32;
+  display: block;
 
-@media (max-width: 768px) {
+  padding: 13px 10px 13px 10px;
+  font-size: 18px;
+  color: white;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 600px) {
+  .dropbtn {
+    background-color: #333;
+    display: block;
+
+    padding: 13px 10px 13px 10px;
+    font-size: 18px;
+    color: white;
+    border: none;
+  }
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
     right: 0px;
     top: 0px;
   }
+
   .nav > .nav-btn > label {
     display: inline-block;
     width: 50px;
@@ -78,17 +151,26 @@
     overflow-y: hidden;
     top: 50px;
     left: 0px;
+    z-index: 1;
   }
   .nav > .nav-links > a {
     display: block;
     width: 100%;
   }
-  .nav > #nav-check:not(:checked) ~ .nav-links {
-    height: 0px;
-  }
-
-  .nav > #nav-check:checked ~ .nav-links {
+  .nav > .nav-links-height {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    transition: all 0.3s ease-in;
+    top: 50px;
+    left: 0px;
     height: calc(100vh - 50px);
     overflow-y: auto;
+    z-index: 1;
+  }
+  .nav > .nav-links-height > a {
+    display: block;
+    width: 100%;
   }
 }

@@ -1,13 +1,52 @@
 import logo from "../../images/WAC.png";
 import "./credentials.css";
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/auth";
 export class Login extends Component {
-  loginSubmit(e) {
-    e.preventDefault();
-    window.location.href = "/home";
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
+  loginSubmit() {
+    // this.props.onAuth(this.state.email, this.state.password);
+    // console.log(this.props.history);
+    if (this.state.username == "" || this.state.password == "") {
+      alert("Enter All fields");
+      return;
+    }
+    this.props.onAuth(this.state.username, this.state.password);
+    this.setState({ username: "", password: "" });
+    this.loginCompleted();
+  }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated == true) {
+      this.props.history.push("/home/dashboard/statistics");
+    }
+  }
+  loginCompleted() {
+    if (this.props.isAuthenticated == true) {
+      this.props.history.push("/home/dashboard/statistics");
+    } else if (!this.props.isAuthenticated && this.props.error) {
+      if (this.props.error.message == "Request failed with status code 400") {
+        alert("Invalid username or password");
+      } else {
+        this.loginCompleted();
+      }
+      this.setState({ username: "", password: "" });
+    }
   }
   render() {
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = this.props.error.message;
+      // alert(errorMessage);
+      // console.log(errorMessage);
+    }
     return (
       <div className="form-container">
         <div className="image-holder">
@@ -26,25 +65,33 @@ export class Login extends Component {
 
             <form className="login-form">
               <div className="form-group">
-                <label className="form-control-label">Email</label>
+                <label className="form-control-label">Username</label>
                 <br></br>
-                <input type="text" className="credentials-email" required />
+                <input
+                  type="text"
+                  className="credentials-email"
+                  onChange={(e) => this.setState({ username: e.target.value })}
+                  value={this.state.username}
+                  required
+                />
               </div>
               <div className="form-group">
-                <label className="form-control-label">PASSWORD</label>
+                <label className="form-control-label">Password</label>
                 <br></br>
                 <input
                   type="password"
                   className="credentials-password"
+                  onChange={(e) => this.setState({ password: e.target.value })}
+                  value={this.state.password}
                   required
                 />
               </div>
 
               <div className="loginbttm">
                 <button
-                  type="submit"
+                  type="button"
                   className="login-button"
-                  onClick={this.loginSubmit}
+                  onClick={() => this.loginSubmit()}
                 >
                   LOGIN
                 </button>
@@ -57,4 +104,16 @@ export class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+    error: state.error,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuth: (username, password) =>
+      dispatch(actions.authLogin(username, password)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

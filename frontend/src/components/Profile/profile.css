@@ -1,0 +1,79 @@
+.profile-container {
+  background-color: rgb(238, 238, 238);
+  height: calc(100vh - 50px);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+.container-1 {
+  flex: 1;
+}
+.container-2 {
+  flex: 2;
+}
+.profile-container section {
+  scroll-snap-align: start;
+}
+.profile-nav {
+  margin: 80px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+.profile-nav a {
+  margin: 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 17px;
+}
+.profile-nav a:hover {
+  font-weight: bolder;
+}
+
+.firewall-details a {
+  text-decoration: none;
+  color: black;
+}
+.profile-container .details {
+  height: 40vh;
+  background-color: white;
+  padding: 40px;
+  margin: 5px;
+  margin-top: 30px;
+  border-radius: 25px;
+}
+.profile-container h2,
+.profile-container h3,
+.profile-container h4 {
+  padding: 7px;
+}
+.profile-container h4 {
+  font-size: 15px;
+  font-weight: normal;
+}
+.profile-container .address {
+  border-radius: 25px;
+  height: 40vh;
+  background-color: white;
+  padding: 40px;
+  margin: 5px;
+  margin-top: 30px;
+}
+.profile-container .firewall-details {
+  border-radius: 25px;
+  height: 40vh;
+  background-color: white;
+  padding: 40px;
+  margin: 5px;
+  margin-top: 30px;
+}
+.account-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

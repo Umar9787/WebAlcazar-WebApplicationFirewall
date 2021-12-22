@@ -1,0 +1,76 @@
+.threats-container {
+  width: 100%;
+  height: calc(100vh - 50px);
+  background-color: rgb(238, 238, 238);
+}
+.threats-container h1 {
+  padding-top: 15px;
+  font-size: 30px;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.threats-container table {
+  width: 100%;
+  table-layout: fixed;
+}
+.tbl-header {
+  background-color: rgba(182, 180, 180, 0.3);
+}
+.tbl-content {
+  height: 300px;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.threats-container th {
+  padding: 15px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  text-transform: uppercase;
+}
+.threats-container td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 15px;
+  color: black;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.threats-container section {
+  margin: 50px;
+  margin-top: 0px;
+}
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.button-quarantine {
+  margin-left: calc(50% - 50px);
+  background-color: #222d32;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button-quarantine:disabled {
+  opacity: 0.5;
+}

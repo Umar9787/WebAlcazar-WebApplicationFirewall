@@ -1,0 +1,113 @@
+.threats-container {
+  overflow-y: hidden;
+  width: 100%;
+  height: calc(100vh - 50px);
+  background-color: rgb(238, 238, 238);
+}
+.threats-container h1 {
+  padding-top: 15px;
+  font-size: 30px;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.threats-container table {
+  width: 100%;
+  table-layout: fixed;
+}
+.tbl-header {
+  background-color: rgba(182, 180, 180, 0.3);
+}
+.tbl-content {
+  height: calc(100vh - 50px);
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.threats-container th {
+  padding: 15px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  text-transform: uppercase;
+}
+.threats-container td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 15px;
+  color: black;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.threats-container section {
+  margin: 50px;
+  margin-top: 0px;
+}
+.button-submit {
+  margin: 10px;
+  margin-left: calc(90% - 50px);
+
+  background-color: #222d32;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.button-submit:disabled {
+  opacity: 0.5;
+}
+.example {
+  display: flex;
+}
+/* Style the search field */
+.example input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196f3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+@media (max-width: 600px) {
+  .example {
+    display: flex;
+    max-width: 300px;
+    margin: auto;
+  }
+  .threats-container section {
+    margin: 0px;
+    padding: 0px;
+  }
+}
