@@ -9,5 +9,13 @@ A web application firewall (WAF) is a specific form of application firewall that
 - In WAC/frontend -> run command "npm install" which will install all the dependencies.
 - In WAC/frontend -> run command "npm start" to start the frontend server.
 - In WAC/ -> run command "python ./manage.py runserver" to start the backend server.
-- Then If you want to access the backend server over the internet run command "ngrok http 8000" but you have to generate your access token first from ngrok website and then run command "ngrok token <your token here>".
-- After the token is setup then run command "ngrok http 8000" which will give you an address to access the server over the internet.
+- For pushing the backend server on Internet, we are going to use ngrok.
+- Visit ngrok.com and create your account to have access to your own authorization token.
+- Download ngrok from ngrok.com and place the ngrok.exe in the WAC folder.
+- Open terminal and navigate to where the ngrok.exe is placed.
+- Type these commands in the terminal.
+      
+      ./ngrok authtoken [YOUR_AUTH_TOKEN]
+      ngrok http 8000
+  
+Note: Token is not a must, but it can help you maintain unlimited sessions.
