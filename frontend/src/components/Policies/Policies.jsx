@@ -30,12 +30,6 @@ export class Policies extends React.Component {
             status: temp[0].fields.xss,
             quarantine: temp[0].fields.xss,
           },
-          {
-            id: 3,
-            name: "XML",
-            status: temp[0].fields.xml,
-            quarantine: temp[0].fields.xml,
-          },
         ];
         this.setState({ Data: Data });
       })
@@ -66,7 +60,6 @@ export class Policies extends React.Component {
           user: user,
           sqli: this.state.Data[0].status,
           xss: this.state.Data[1].status,
-          xml: this.state.Data[2].status,
         })
         .then((res) => console.log(res));
       axios
@@ -85,12 +78,6 @@ export class Policies extends React.Component {
               name: "XSS",
               status: temp[0].fields.xss,
               quarantine: temp[0].fields.xss,
-            },
-            {
-              id: 3,
-              name: "XML",
-              status: temp[0].fields.xml,
-              quarantine: temp[0].fields.xml,
             },
           ];
           this.setState({ Data: Data });

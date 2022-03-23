@@ -125,7 +125,6 @@ class SavePolicies(APIView):
         object1 = Policies.objects.get(user=user)
         object1.sqli = request.data["sqli"]
         object1.xss = request.data["xss"]
-        object1.xml = request.data["xml"]
         object1.save()
         return Response("success")
 
