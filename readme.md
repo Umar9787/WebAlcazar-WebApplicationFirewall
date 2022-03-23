@@ -18,4 +18,4 @@ A web application firewall (WAF) is a specific form of application firewall that
       ./ngrok authtoken [YOUR_AUTH_TOKEN]
       ngrok http 8000
   
-Note: Token is not a must, but it can help you maintain unlimited sessions.
+Note point: Token is not a must, but it can help you maintain unlimited sessions.
