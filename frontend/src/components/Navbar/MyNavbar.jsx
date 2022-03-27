@@ -13,10 +13,11 @@ import {
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/auth";
 import Dashboard from "../Dashboard/Dashboard";
-import Threats from "../Dashboard/Threats/Threats";
 import Policies from "../Policies/Policies";
 import Profile from "../Profile/Profile";
 import Defences from "../Defences/Defences";
+import SQLi from "../Dashboard/Threats/SQLi/SQLi";
+import XSS from "../Dashboard/Threats/XSS/XSS";
 function MyNavbar(props) {
   const [displayNav, setDisplayNav] = useState(true);
 
@@ -51,10 +52,16 @@ function MyNavbar(props) {
                 Statistics
               </Link>
               <Link
-                to={`${url}/dashboard/threats`}
+                to={`${url}/dashboard/threats/sqli`}
                 onClick={() => setDisplayNav(!displayNav)}
               >
-                Threats
+                SQLi
+              </Link>
+              <Link
+                to={`${url}/dashboard/threats/xss`}
+                onClick={() => setDisplayNav(!displayNav)}
+              >
+                XSS
               </Link>
             </div>
           </div>
@@ -92,8 +99,13 @@ function MyNavbar(props) {
         </Route>
         <Route
           exact
-          path={`${path}/dashboard/threats`}
-          component={(prop) => <Threats {...prop} {...props} />}
+          path={`${path}/dashboard/threats/sqli`}
+          component={(prop) => <SQLi {...prop} {...props} />}
+        ></Route>
+        <Route
+          exact
+          path={`${path}/dashboard/threats/xss`}
+          component={(prop) => <XSS {...prop} {...props} />}
         ></Route>
         <Route
           exact

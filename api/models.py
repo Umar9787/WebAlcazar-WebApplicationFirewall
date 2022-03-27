@@ -21,6 +21,15 @@ class SQLi(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 
+class XSS(models.Model):
+    query = models.CharField(max_length=300)
+    xss = models.BooleanField()
+    time = models.DateTimeField(auto_created=True)
+    ip = models.CharField(max_length=50)
+    quarantine = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+
 class Policies(models.Model):
     sqli = models.BooleanField(default=False)
     xss = models.BooleanField(default=False)

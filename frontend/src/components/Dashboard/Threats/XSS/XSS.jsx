@@ -1,27 +1,21 @@
 import React from "react";
 import "./threats.css";
-import ButtonLoader from "./ButtonLoader";
 import axios from "axios";
-export class Threats extends React.Component {
+export class XSS extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       Data: [],
+      XSS: [],
     };
   }
   newFunction() {}
 
   componentDidMount() {
     const user = localStorage.getItem("username");
-    // this.interval = setInterval(() => {
-    //   axios
-    //     .post("http://127.0.0.1:8000/api/getsqli/", { user })
-    //     .then((res) => this.setState({ Data: JSON.parse(res.data) }))
-    //     .catch((err) => console.log(err));
-    // }, 1000);
 
     axios
-      .post("http://127.0.0.1:8000/api/getsqli/", { user: user })
+      .post("http://127.0.0.1:8000/api/getxss/", { user: user })
       .then((res) => this.setState({ Data: JSON.parse(res.data) }))
       .catch((err) => console.log(err));
   }
@@ -35,14 +29,18 @@ export class Threats extends React.Component {
 
     const user = localStorage.getItem("username");
     axios
-      .post("http://127.0.0.1:8000/api/quarantine/", { id })
+      .post("http://127.0.0.1:8000/api/quarantinexss/", { id })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     axios
-      .post("http://127.0.0.1:8000/api/getsqli/", { user: user })
+      .post("http://127.0.0.1:8000/api/getxss/", { user: user })
       .then((res) => {
         this.setState({ Data: JSON.parse(res.data) });
-        this.props.history.push("/home/dashboard/threats");
+        // axios
+        //   .post("http://127.0.0.1:8000/api/getxss/", { user: user })
+        //   .then((res) => this.setState({ XSS: JSON.parse(res.data) }))
+        //   .catch((err) => console.log(err));
+        this.props.history.push("/home/dashboard/threats/xss");
       })
       .catch((err) => console.log(err));
   }
@@ -50,14 +48,14 @@ export class Threats extends React.Component {
     return (
       <div className="threats-container">
         <section>
-          <h1>Threats</h1>
+          <h1>XSS</h1>
           <div className="tbl-header">
             <table>
               <thead>
                 <tr>
                   <th>Id</th>
                   <th>Query</th>
-                  <th>SQLi</th>
+                  <th>XSS</th>
                   <th>Time</th>
                   <th>IP</th>
                   <th>Quarantine</th>
@@ -73,7 +71,7 @@ export class Threats extends React.Component {
                     <tr key={data.pk}>
                       <td>{data.pk}</td>
                       <td>{data.fields.query}</td>
-                      <td>{data.fields.sqli ? "Yes" : "No"}</td>
+                      <td>{data.fields.xss ? "Yes" : "No"}</td>
                       <td>{data.fields.time}</td>
                       <td>{data.fields.ip}</td>
                       {/* <td>{data.fields.quarantine ? "Yes" : "No"} </td> */}
@@ -97,7 +95,6 @@ export class Threats extends React.Component {
                 })}
               </tbody>
             </table>
-            <ButtonLoader />
           </div>
         </section>
       </div>
@@ -105,4 +102,4 @@ export class Threats extends React.Component {
   }
 }
 
-export default Threats;
+export default XSS;
