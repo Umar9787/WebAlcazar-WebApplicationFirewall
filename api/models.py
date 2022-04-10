@@ -35,3 +35,9 @@ class Policies(models.Model):
     xss = models.BooleanField(default=False)
     xml = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+
+class IP(models.Model):
+    ip = models.CharField(max_length=50)
+    blacklist = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)

@@ -1,10 +1,9 @@
-import json
+from urllib import response
 from django.db.models import query
 from django.http.response import HttpResponse, JsonResponse
 from rest_framework import generics
-import rest_framework
 from rest_framework.views import APIView
-from .models import Account, Policies, SQLi, XSS
+from .models import Account, Policies, SQLi, XSS, IP
 from .serializers import AccountSerializer, SQLiSerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -12,7 +11,7 @@ from django.utils import timezone
 from django.core import serializers
 import os
 from django.shortcuts import get_object_or_404
-
+from django.db.models import Q
 
 import pandas as pd
 import numpy as np
@@ -96,12 +95,18 @@ class PostSQLi(APIView):
         object1 = Policies.objects.get(user=user)
         if object1.sqli == False:
             return Response("Sqli not active")
+        criterion1 = Q(user=user)
+        criterion2 = Q(ip=get_client_ip(request))
+
+        getIP = IP.objects.filter(criterion1 & criterion2)
+        if len(getIP) > 0:
+            return Response("Blacklisted ip")
         # print("user is -> ", request.user)
         user = User.objects.get(username=request.data["user"])
         module_dir = os.path.dirname(__file__)  # get current directory
         file_path = os.path.join(module_dir, 'sqli.h5')
         new_model = tf.keras.models.load_model(file_path)
-        evaluation_string = request.data["username"]
+        evaluation_string = request.data["query"]
         payload = {}
         payload['Query'] = evaluation_string
         payload['Length'] = len(evaluation_string)
@@ -124,7 +129,7 @@ class PostSQLi(APIView):
         if prediction_value[0][0][0] >= 0.50:
             cond = True
         obj = SQLi(
-            query=request.data["username"],
+            query=request.data["query"],
             sqli=cond,
             time=timezone.now(),
             ip=get_client_ip(request),
@@ -157,12 +162,18 @@ class PostXSS(APIView):
         object1 = Policies.objects.get(user=user)
         if object1.sqli == False:
             return Response("XSS not active")
+        criterion1 = Q(user=user)
+        criterion2 = Q(ip=get_client_ip(request))
+
+        getIP = IP.objects.filter(criterion1 & criterion2)
+        if len(getIP) > 0:
+            return Response("Blacklisted ip")
         # print("user is -> ", request.user)
         user = User.objects.get(username=request.data["user"])
         module_dir = os.path.dirname(__file__)  # get current directory
         file_path = os.path.join(module_dir, 'xss.h5')
         new_model = tf.keras.models.load_model(file_path)
-        evaluation_string = request.data["username"]
+        evaluation_string = request.data["query"]
         payload = {}
         payload['Contains &lt'] = cal_keyword(evaluation_string, "&lt")
         payload['ScriptTag'] = cal_keyword(evaluation_string, "script")
@@ -253,14 +264,14 @@ class PostXSS(APIView):
         cond = False
         if pred >= 0.50:
             cond = True
-            obj = XSS(
-                query=request.data["username"],
-                xss=cond,
-                time=timezone.now(),
-                ip=get_client_ip(request),
-                user=user,
-            )
-            obj.save()
+        obj = XSS(
+            query=request.data["query"],
+            xss=cond,
+            time=timezone.now(),
+            ip=get_client_ip(request),
+            user=user,
+        )
+        obj.save()
 
         return Response()
 
@@ -325,6 +336,48 @@ class GetPolicies(APIView):
         return Response(serializers.serialize(
             'json', object1))
 
+
+class BlackListIP(APIView):
+    def post(self, request, format=None):
+        try:
+            user = User.objects.get(username=request.data["user"])
+        except:
+            return Response("error")
+        object1 = IP(
+            user=user,
+            ip=request.data["ip"],
+            blacklist=True,
+        )
+        object1.save()
+        return Response("success")
+
+
+class RemoveBlackListIP(APIView):
+    def post(self, request, format=None):
+        try:
+            user = User.objects.get(username=request.data["user"])
+        except:
+            return Response("error")
+        criterion1 = Q(user=user)
+        criterion2 = Q(ip=request.data["ip"])
+
+        object1 = IP.objects.filter(criterion1 & criterion2)
+        object1.delete()
+        return Response("success")
+
+
+class GetBlackListIP(APIView):
+    def post(self, request, format=None):
+        try:
+            user = User.objects.get(username=request.data["user"])
+        except:
+            return Response("error")
+        criterion1 = Q(user=user)
+
+        object1 = IP.objects.filter(criterion1).only(
+            'pk', 'ip')
+        return Response(serializers.serialize(
+            'json', object1))
 # {"query":"123"}
 # {"user":"admin"}
 # {

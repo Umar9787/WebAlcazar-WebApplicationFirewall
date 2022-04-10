@@ -27,7 +27,7 @@
 .nav > .nav-links {
   display: inline;
   float: right;
-  margin-right: 40%;
+  /* margin-right: 40%; */
   font-size: 18px;
 }
 
@@ -41,7 +41,7 @@
 .nav > .nav-links-height {
   display: inline;
   float: right;
-  margin-right: 40%;
+  /* margin-right: 40%; */
   font-size: 18px;
 }
 

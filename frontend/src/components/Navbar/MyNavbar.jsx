@@ -18,6 +18,7 @@ import Profile from "../Profile/Profile";
 import Defences from "../Defences/Defences";
 import SQLi from "../Dashboard/Threats/SQLi/SQLi";
 import XSS from "../Dashboard/Threats/XSS/XSS";
+import Blacklist from "../Blacklist/Blacklist";
 function MyNavbar(props) {
   const [displayNav, setDisplayNav] = useState(true);
 
@@ -83,6 +84,9 @@ function MyNavbar(props) {
           >
             Profile
           </Link>
+          <Link to={`${url}/ips`} onClick={() => setDisplayNav(!displayNav)}>
+            Blacklist Ips
+          </Link>
           <Link
             to="/"
             onClick={() => {
@@ -117,6 +121,9 @@ function MyNavbar(props) {
         </Route>
         <Route path={`${path}/profile`}>
           <Profile />
+        </Route>
+        <Route path={`${path}/ips`}>
+          <Blacklist />
         </Route>
       </Switch>
     </div>
