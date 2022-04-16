@@ -78,12 +78,12 @@ function MyNavbar(props) {
           >
             Defences
           </Link>
-          <Link
+          {/* <Link
             to={`${url}/profile`}
             onClick={() => setDisplayNav(!displayNav)}
           >
             Profile
-          </Link>
+          </Link> */}
           <Link to={`${url}/ips`} onClick={() => setDisplayNav(!displayNav)}>
             Blacklist Ips
           </Link>
@@ -119,9 +119,9 @@ function MyNavbar(props) {
         <Route path={`${path}/defences`}>
           <Defences />
         </Route>
-        <Route path={`${path}/profile`}>
+        {/* <Route path={`${path}/profile`}>
           <Profile />
-        </Route>
+        </Route> */}
         <Route path={`${path}/ips`}>
           <Blacklist />
         </Route>
@@ -129,12 +129,17 @@ function MyNavbar(props) {
     </div>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    loading: state.loading,
-    error: state.error,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     loading: state.loading,
+//     error: state.error,
+//   };
+// };
+// const mapStateToProps = (state) => {
+//   return {
+//     isAuthenticated: state.token != null,
+//   };
+// };
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(actions.logout()),

@@ -61,7 +61,7 @@
 }
 
 .policies-container .policy-text {
-  margin-top: 50px;
+  margin-top: 30px;
   font-size: 15px;
 }
 .policy-agree {
@@ -159,7 +159,6 @@
   color: white;
   font-size: larger;
   margin-left: 40%;
-  margin-top: 4%;
 }
 .btn-submit:hover {
   background-color: white;

@@ -160,7 +160,7 @@ class PostXSS(APIView):
     def post(self, request, format=None):
         user = User.objects.get(username=request.data["user"])
         object1 = Policies.objects.get(user=user)
-        if object1.sqli == False:
+        if object1.xss == False:
             return Response("XSS not active")
         criterion1 = Q(user=user)
         criterion2 = Q(ip=get_client_ip(request))

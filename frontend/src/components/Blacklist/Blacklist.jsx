@@ -2,8 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import "./blacklist.css";
+
 export default function Blacklist() {
   const [ip, setIp] = useState("");
+  const [temp, setTemp] = useState("12");
   const [ipList, setIpList] = useState([]);
   function formSubmitted(e) {
     e.preventDefault();
@@ -17,6 +19,7 @@ export default function Blacklist() {
       });
 
     setIp("");
+    setTemp(...temp, "2");
   }
   useEffect(() => {
     const user = localStorage.getItem("username");
@@ -26,7 +29,18 @@ export default function Blacklist() {
         setIpList(JSON.parse(res.data));
       });
   }, [ip]);
-
+  function removeIP(data) {
+    const user = localStorage.getItem("username");
+    axios
+      .post("http://127.0.0.1:8000/api/removeblacklistip/", {
+        user: user,
+        ip: data.fields.ip,
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/home/ips";
+      });
+  }
   return (
     <div className="policies-container">
       <h1>Blacklist IP</h1>
@@ -68,24 +82,7 @@ export default function Blacklist() {
                   <td>{data.fields.ip}</td>
                   <td
                     className="blacklist-cross"
-                    onClick={() => {
-                      const user = localStorage.getItem("username");
-                      axios
-                        .post("http://127.0.0.1:8000/api/removeblacklistip/", {
-                          user: user,
-                          ip: data.fields.ip,
-                        })
-                        .then((res) => {
-                          console.log(res.data);
-                        });
-                      setIp("");
-                      setIpList(
-                        ipList.filter(
-                          (item) => item.fields.ip === data.fields.ip
-                        )
-                      );
-                      console.log(ipList);
-                    }}
+                    onClick={() => removeIP(data)}
                   >
                     <span>X</span>
                   </td>

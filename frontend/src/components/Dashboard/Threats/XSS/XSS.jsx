@@ -79,7 +79,7 @@ export class XSS extends React.Component {
                         <div onClick={() => this.quarantineThreat(data.pk)}>
                           {data.fields.quarantine ? (
                             <div className="check-container">
-                              <input type="checkbox" checked="checked" />
+                              <input type="checkbox" defaultChecked />
                               <span className="checkmark"></span>
                             </div>
                           ) : (

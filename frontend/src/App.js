@@ -38,10 +38,14 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.token != null,
+    isAuthenticated: localStorage.getItem("token") != null,
   };
 };
 const mapDispatchToProps = (dispatch) => {
+  const expirationDate = new Date(localStorage.getItem("expirationDate"));
+  if (expirationDate <= new Date()) {
+    dispatch(actions.logout());
+  }
   return {
     onTryAutoSignUp: () => dispatch(actions.authCheckState()),
   };
