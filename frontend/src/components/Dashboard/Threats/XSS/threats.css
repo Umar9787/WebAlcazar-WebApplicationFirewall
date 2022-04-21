@@ -47,7 +47,9 @@
   margin: 50px;
   margin-top: 0px;
 }
-
+.xss-query {
+  width: 25%;
+}
 /* for custom scrollbar for webkit browser*/
 
 ::-webkit-scrollbar {

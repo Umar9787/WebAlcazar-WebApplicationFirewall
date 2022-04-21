@@ -54,7 +54,7 @@ export class XSS extends React.Component {
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Query</th>
+                  <th class="xss-query">Query</th>
                   <th>XSS</th>
                   <th>Time</th>
                   <th>IP</th>
@@ -70,7 +70,7 @@ export class XSS extends React.Component {
                   return (
                     <tr key={data.pk}>
                       <td>{data.pk}</td>
-                      <td>{data.fields.query}</td>
+                      <td class="xss-query">{data.fields.query}</td>
                       <td>{data.fields.xss ? "Yes" : "No"}</td>
                       <td>{data.fields.time}</td>
                       <td>{data.fields.ip}</td>
